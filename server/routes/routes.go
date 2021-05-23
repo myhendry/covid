@@ -6,11 +6,14 @@ import (
 )
 
 func Setup(app *fiber.App) {
-	app.Get("/api/test/all", controllers.AllTests)
-	app.Get("/api/test/:id", controllers.GetTest)
-	app.Post("/api/test/add", controllers.AddTest)
-	app.Put("/api/test/:id", controllers.UpdateTest)
-	app.Delete("/api/test/:id", controllers.DeleteTest)
+	app.Get("/api/users", controllers.GetUsers)
+	app.Post("/api/users/add", controllers.AddUser)
+
+	app.Get("/api/tests", controllers.GetTests)
+	app.Get("/api/tests/:id", controllers.GetTest)
+	app.Post("/api/tests/add", controllers.AddTest)
+	app.Put("/api/tests/:id", controllers.UpdateTest)
+	app.Delete("/api/tests/:id", controllers.DeleteTest)
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Yeah")
 	})

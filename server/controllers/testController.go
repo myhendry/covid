@@ -6,7 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func AllTests(c *fiber.Ctx) error {
+func GetTests(c *fiber.Ctx) error {
 	var tests []models.Test
 
 	database.DB.Find(&tests)
