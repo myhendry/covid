@@ -1,0 +1,23 @@
+settings:
+  legacy:
+    force: false
+    interval: 0s
+schema:
+  - name: covid
+    path: .
+    commands:
+      install:
+        status: true
+        method: go build -o /Users/hendrylim/coding/lab/go/covid/server/build
+      run:
+        status: true
+        method: /Users/hendrylim/coding/lab/go/covid/server/build
+    watcher:
+      extensions:
+        - go
+      paths:
+        - /
+      ignored_paths:
+        - .git
+        - .realize
+        - vendor
