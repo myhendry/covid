@@ -1,8 +1,25 @@
-Associations
-Deploy
+- [x] Belong To
+- [x] Has One
+- [x] One-to-Many
+- [ ] SQL Builder
+- [x] Time X
+- [ ] Many-to-Many
+- [x] Cascade Delete
+- [ ] Cascade Update 
+- [ ] Deploy
 
 Tutorial Udemy React & Golang: A Practical Guide
 https://github.com/myhendry/fiber_react_tutorial
+
+# ASSOCIATIONS
+Belongs To (User - Role) Role Belongs to User
+Create Role
+Create User with role_id
+
+Has One (User - Profile) User Has One Profile
+Create User
+Create Profile with user_id
+# DATABASE
 
 /usr/local/mysql/bin/mysql -u root -p
 

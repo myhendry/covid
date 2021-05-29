@@ -1,9 +1,15 @@
 package models
 
-import "gorm.io/gorm"
+import "time"
 
 type User struct {
-	gorm.Model
+	ID uint
 	Name string `json:"name"`
 	Age uint	`json:"age"`
+	Profile Profile `gorm:"constraint:OnDelete:CASCADE"`
+	RoleID uint `json:"role_id"`
+	Role Role `gorm:"constraint:OnDelete:CASCADE"`
+	Books []Book `gorm:"constraint:OnDelete:CASCADE"`
+	CreatedAt    time.Time
+  UpdatedAt    time.Time
 }

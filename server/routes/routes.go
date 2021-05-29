@@ -6,8 +6,28 @@ import (
 )
 
 func Setup(app *fiber.App) {
+	app.Delete("/api/all", controllers.DeleteAllTables)
+
 	app.Get("/api/users", controllers.GetUsers)
 	app.Post("/api/users/add", controllers.AddUser)
+	app.Delete("/api/users/:id", controllers.DeleteUser)
+	app.Delete("/api/users", controllers.DeleteAllUsers)
+
+	app.Get("/api/roles", controllers.GetRoles)
+	app.Post("/api/roles/add", controllers.AddRole)
+	app.Delete("/api/roles/:id", controllers.DeleteRole)
+	app.Delete("/api/roles", controllers.DeleteAllRoles)
+
+	app.Get("/api/profiles", controllers.GetProfiles)
+	app.Post("/api/profiles/add", controllers.AddProfile)
+	app.Delete("/api/profiles/:id", controllers.DeleteProfile)
+	app.Delete("/api/profiles", controllers.DeleteAllProfiles)
+
+	app.Get("/api/books", controllers.GetBooks)
+	app.Get("/api/books/:id", controllers.GetBook)
+	app.Post("/api/books/add", controllers.AddBook)
+	app.Put("/api/books/:id", controllers.UpdateBook)
+	app.Delete("/api/books/:id", controllers.DeleteBook)
 
 	app.Get("/api/tests", controllers.GetTests)
 	app.Get("/api/tests/:id", controllers.GetTest)

@@ -32,7 +32,7 @@ func DeleteTest(c *fiber.Ctx) error {
 
 		database.DB.First(&test, id)
 
-		if test.Name == "" {
+		if test.Title == "" {
 			return c.Status(500).SendString("No Test Found with Given Id")
 		}
 
@@ -48,7 +48,7 @@ func UpdateTest(c *fiber.Ctx) error {
 
 	database.DB.First(&test, id)
 
-	if test.Name == "" {
+	if test.Title == "" {
 		return c.Status(500).SendString("No Test Found with Given Id")
 	}
 

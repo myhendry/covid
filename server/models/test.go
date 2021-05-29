@@ -1,8 +1,6 @@
 package models
 
-import "gorm.io/gorm"
-
 type Test struct {
-	gorm.Model
-	Name string `json:"name"`
+	ID uint
+	Title string `json:"title"`
 }
