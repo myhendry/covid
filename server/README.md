@@ -1,3 +1,6 @@
+# Tutorial Udemy React & Golang: A Practical Guide
+[Github Repo](https://github.com/myhendry/fiber_react_tutorial)
+
 - [x] Belong To
 - [x] Has One
 - [x] One-to-Many
@@ -8,10 +11,8 @@
 - [ ] Cascade Update 
 - [ ] Deploy
 
-Tutorial Udemy React & Golang: A Practical Guide
-https://github.com/myhendry/fiber_react_tutorial
-
-# ASSOCIATIONS
+---
+### ASSOCIATIONS
 Belongs To (User - Role) Role Belongs to User
 Create Role
 Create User with role_id
@@ -19,8 +20,7 @@ Create User with role_id
 Has One (User - Profile) User Has One Profile
 Create User
 Create Profile with user_id
-# DATABASE
-
+### DATABASE
 /usr/local/mysql/bin/mysql -u root -p
 
 show databases;
@@ -32,10 +32,11 @@ CREATE USER 'user1'@'localhost' IDENTIFIED BY 'password';
 // GRANT ALL PRIVILEGES ON \*.\* TO 'user1'@'localhost';
 (\ as escape character only)
 
-
 ~/go/bin/realize start
 
 password 1234
+
+```javascript
 
 .realize.yaml
 
@@ -63,3 +64,4 @@ schema:
         - .realize
         - vendor
 
+```
