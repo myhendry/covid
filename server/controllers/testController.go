@@ -108,8 +108,12 @@ func createFromMap(m map[string]interface{}) (models.Test, error) {
 
 func TestTest(c *fiber.Ctx) error {
 	var tests []models.Test
+	var count int64
+	
+	database.DB.Where("approved=?", true).Find(&tests).Count(&count)
 
-	database.DB.Where("approved=?", true).Find(&tests)
-
-	return c.JSON(tests)
+	return c.JSON(fiber.Map{
+		"tests": tests,
+		"count": count,
+	})
 }
