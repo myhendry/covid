@@ -1,9 +1,12 @@
 package controllers
 
 import (
+	"errors"
+
 	"crypto.hendrylim/database"
 	"crypto.hendrylim/models"
 	"github.com/gofiber/fiber/v2"
+	"gorm.io/gorm"
 )
 
 func GetRoles(c *fiber.Ctx) error {
@@ -30,11 +33,10 @@ func DeleteRole(c *fiber.Ctx) error {
 	id := c.Params("id")
 
 	var role models.Role
-
-	database.DB.First(&role, id)
-
-	if role.Name == "" {
-		return c.Status(500).SendString("No Role Found with Given Id")
+	
+	err := database.DB.First(&role, id).Error
+	if (errors.Is(err, gorm.ErrRecordNotFound)) {
+				return c.Status(500).SendString("No Role Found with Given Id")
 	}
 
 	database.DB.Delete(&role)

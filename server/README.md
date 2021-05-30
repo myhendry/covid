@@ -4,11 +4,16 @@
 - [x] Belong To
 - [x] Has One
 - [x] One-to-Many
+- [x] No Record Found Error Handling
+- [x] Authentication
+- [ ] Middleware - IsAuthenticated
+- [ ] Get User from Auth
 - [ ] SQL Builder
 - [x] Time X
 - [ ] Many-to-Many
 - [x] Cascade Delete
 - [ ] Cascade Update 
+- [ ] Authorization
 - [ ] Deploy
 
 ---
