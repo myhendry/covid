@@ -86,16 +86,16 @@ func Login(c *fiber.Ctx) error {
 	})
 }
 
-func User(c *fiber.Ctx) error {
+func Me(c *fiber.Ctx) error {
 	cookie := c.Cookies("jwt")
 
 	id, _ := util.ParseJwt(cookie)
 
 	var user models.User
 
-	 errUserNotFound := database.DB.Preload("Role").Where("id=?", id).First(&user).Error
+	errUserNotFound := database.DB.Where("id=?", id).First(&user).Error
 
-	 if (errors.Is(errUserNotFound, gorm.ErrRecordNotFound)) {
+		 if (errors.Is(errUserNotFound, gorm.ErrRecordNotFound)) {
 		return c.Status(400).JSON(fiber.Map{
 			"message": "User Not Found",
 		})
@@ -120,4 +120,59 @@ func Logout(c *fiber.Ctx) error {
 	})
 }
 
+func UpdateUser(c *fiber.Ctx) error {
+	var data map[string]string
+
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+	
+	cookies := c.Cookies("jwt")
+
+	id, _ := util.ParseJwt(cookies)
+
+	userId, _ := strconv.Atoi(id)
+	userAge, _ := strconv.Atoi(data["age"])
+
+	user := models.User{
+		ID: uint(userId),
+		Name: data["name"],
+		Age: uint(userAge),
+	}
+
+	database.DB.Model(&user).Updates(&user)
+
+	return c.JSON(user)
+}
+
+func UpdatePassword(c *fiber.Ctx) error {
+	var data map[string]string
+
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+
+	if data["password"] != data["password_confirm"] {
+		c.Status(400)
+		return c.JSON(fiber.Map{
+			"message": "Passwords do not match",
+		})
+	}
+	
+	cookies := c.Cookies("jwt")
+
+	id, _ := util.ParseJwt(cookies)
+
+	userId, _ := strconv.Atoi(id)
+
+	user := models.User{
+		ID: uint(userId),
+	}
+
+	user.SetPassword(data["password"])
+
+	database.DB.Model(&user).Updates(&user)
+
+	return c.JSON(user)
+}
 

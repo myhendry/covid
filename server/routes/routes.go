@@ -2,14 +2,24 @@ package routes
 
 import (
 	"crypto.hendrylim/controllers"
+	"crypto.hendrylim/middlewares"
 	"github.com/gofiber/fiber/v2"
 )
 
 func Setup(app *fiber.App) {
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Yeah")
+	})
 	app.Post("/api/auth/register", controllers.Register)
 	app.Post("/api/auth/login", controllers.Login)
+
+	//* Authenticated Routes Below
+	app.Use(middlewares.IsAuthenticated)
+
 	app.Post("/api/auth/logout", controllers.Logout)
-	app.Get("/api/auth/user", controllers.User)
+	app.Get("/api/auth/me", controllers.Me)
+	app.Put("/api/auth/update-user", controllers.UpdateUser)
+	app.Put("/api/auth/update-password", controllers.UpdatePassword)
 
 	app.Delete("/api/all", controllers.DeleteAllTables)
 
@@ -39,7 +49,7 @@ func Setup(app *fiber.App) {
 	app.Post("/api/tests/add", controllers.AddTest)
 	app.Put("/api/tests/:id", controllers.UpdateTest)
 	app.Delete("/api/tests/:id", controllers.DeleteTest)
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Yeah")
-	})
+
+
+
 }

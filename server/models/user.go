@@ -10,8 +10,8 @@ type User struct {
 	ID uint `json:"id"`
 	Name string `json:"name"`
 	Age uint	`json:"age"`
-	Email string `json:"email"`
-	Password []byte `json:"password"`
+	Email string `json:"email" gorm:"unique"`
+	Password []byte `json:"-"`
 	Profile Profile `gorm:"constraint:OnDelete:CASCADE"`
 	RoleID uint `json:"role_id"`
 	Role Role `json:"role" gorm:"foreignKey:RoleID"`

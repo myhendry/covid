@@ -6,8 +6,8 @@
 - [x] One-to-Many
 - [x] No Record Found Error Handling
 - [x] Authentication
-- [ ] Middleware - IsAuthenticated
-- [ ] Get User from Auth
+- [x] Middleware - IsAuthenticated
+- [x] Get UserID from Auth
 - [ ] SQL Builder
 - [x] Time X
 - [ ] Many-to-Many
