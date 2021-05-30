@@ -7,6 +7,18 @@ import (
 )
 
 func Setup(app *fiber.App) {
+	api := app.Group("/api")
+
+	tests := api.Group("/tests", middlewares.IsAuthenticated)
+
+	tests.Get("/", controllers.GetTests)
+	tests.Get("/try", controllers.TestTest)
+	tests.Get("/:id", controllers.GetTest)
+	tests.Post("/add", controllers.AddTest)
+	tests.Post("/add2", controllers.AddTest2)
+	tests.Put("/:id", controllers.UpdateTest)
+	tests.Delete("/:id", controllers.DeleteTest)
+
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Yeah")
 	})
@@ -43,13 +55,4 @@ func Setup(app *fiber.App) {
 	app.Post("/api/books/add", controllers.AddBook)
 	app.Put("/api/books/:id", controllers.UpdateBook)
 	app.Delete("/api/books/:id", controllers.DeleteBook)
-
-	app.Get("/api/tests", controllers.GetTests)
-	app.Get("/api/tests/:id", controllers.GetTest)
-	app.Post("/api/tests/add", controllers.AddTest)
-	app.Put("/api/tests/:id", controllers.UpdateTest)
-	app.Delete("/api/tests/:id", controllers.DeleteTest)
-
-
-
 }

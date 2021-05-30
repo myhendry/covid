@@ -8,6 +8,7 @@
 - [x] Authentication
 - [x] Middleware - IsAuthenticated
 - [x] Get UserID from Auth
+- [ ] Query
 - [ ] SQL Builder
 - [x] Time X
 - [ ] Many-to-Many
