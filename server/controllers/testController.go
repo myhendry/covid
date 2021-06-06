@@ -3,6 +3,7 @@ package controllers
 import (
 	"errors"
 	"fmt"
+	"strconv"
 
 	"crypto.hendrylim/database"
 	"crypto.hendrylim/models"
@@ -46,6 +47,7 @@ func DeleteTest(c *fiber.Ctx) error {
 
 }
 
+//* Using Structs Only
 func UpdateTest(c *fiber.Ctx) error {
 	id := c.Params("id")
 
@@ -68,6 +70,7 @@ func UpdateTest(c *fiber.Ctx) error {
 	return c.SendString("Test Successfully Updated")
 }
 
+//* Using Structs Only
 func AddTest(c *fiber.Ctx) error {
 	var test models.Test
 
@@ -80,6 +83,7 @@ func AddTest(c *fiber.Ctx) error {
 	return c.JSON(test)
 }
 
+//* Using Maps and Empty Interfaces
 func AddTest2(c *fiber.Ctx) error {
 	var data map[string]interface{}
 
@@ -106,6 +110,7 @@ func createFromMap(m map[string]interface{}) (models.Test, error) {
 	return result, err
 }
 
+//* Using Where Clause in Find
 func TestTest(c *fiber.Ctx) error {
 	var tests []models.Test
 	var count int64
@@ -116,4 +121,26 @@ func TestTest(c *fiber.Ctx) error {
 		"tests": tests,
 		"count": count,
 	})
+}
+
+//* Using Maps and Empty Interfaces
+func UpdateTest2(c *fiber.Ctx) error {
+	id := c.Params("id")
+
+	userId, _ := strconv.Atoi(id)
+	
+	var test map[string]interface{}
+
+	if err := c.BodyParser(&test); err != nil {
+		return err
+	}
+
+	s := models.Test{
+		ID: uint(userId),
+	}
+
+	database.DB.Model(&s).Updates(test)
+
+	return c.JSON(test)
+	
 }

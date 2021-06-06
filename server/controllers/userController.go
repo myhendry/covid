@@ -9,7 +9,11 @@ import (
 func GetUsers(c *fiber.Ctx) error {
 	var users []models.User
 
-	database.DB.Preload("Role").Preload("Profile").Preload("Books").Find(&users)
+	database.DB.Preload("Role").Preload("Profile").Preload("Books.Authors").Find(&users)
+
+	for i, user := range users {
+		users[i].Nickname = user.GetNickname()
+	}
 
 	return c.JSON(users)
 }

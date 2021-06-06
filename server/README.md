@@ -1,4 +1,5 @@
 # Tutorial Udemy React & Golang: A Practical Guide
+
 [Github Repo](https://github.com/myhendry/fiber_react_tutorial)
 
 - [x] Belong To
@@ -8,25 +9,49 @@
 - [x] Authentication
 - [x] Middleware - IsAuthenticated
 - [x] Get UserID from Auth
+- [x] Time X
+- [x] Many-to-Many: Create Tables
+- [x] Many-to-Many: Add Record
 - [ ] Query
 - [ ] SQL Builder
-- [x] Time X
-- [ ] Many-to-Many
+- [ ] Associations
 - [x] Cascade Delete
-- [ ] Cascade Update 
+- [ ] Cascade Update
 - [ ] Authorization
 - [ ] Deploy
+- [ ] Real-Time
 
 ---
+
 ### ASSOCIATIONS
-Belongs To (User - Role) Role Belongs to User
+
+# Belongs To (User - Role) Role Belongs to User
+
+## ! Need to Create Role First before can create User
+
 Create Role
 Create User with role_id
 
-Has One (User - Profile) User Has One Profile
+# Has One (User - Profile) User Has One Profile
+
+## ! Need to Create User First Then Create Profile
+
 Create User
 Create Profile with user_id
+
+# Has One (Order - OrderItem) Order Has Many OrderItem
+
+## ! Need to Have Order First Then Create OrderItem
+
+Create Order
+Create OrderItem with order_id
+
+# Has Many (Books - Authors) Books Has Many Authors
+
+Create Book 1) with Author Id 2) without Author Id
+
 ### DATABASE
+
 /usr/local/mysql/bin/mysql -u root -p
 
 show databases;

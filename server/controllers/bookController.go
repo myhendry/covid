@@ -9,7 +9,7 @@ import (
 func GetBooks(c *fiber.Ctx) error {
 	var books []models.Book
 
-	database.DB.Find(&books)
+	database.DB.Preload("Authors").Find(&books)
 
 	return c.JSON(books)
 }
@@ -70,4 +70,25 @@ func AddBook(c *fiber.Ctx) error {
 	database.DB.Create(&book)
 
 	return c.JSON(book)
+}
+
+func GetAuthors(c *fiber.Ctx) error {
+	var authors []models.Author
+
+	database.DB.Find(&authors)
+
+	return c.JSON(authors)
+}
+
+
+func AddAuthor(c *fiber.Ctx) error {
+	var author models.Author
+
+	if err := c.BodyParser(&author); err != nil {
+		return err
+	}
+
+	database.DB.Create(&author)
+
+	return c.JSON(author)
 }

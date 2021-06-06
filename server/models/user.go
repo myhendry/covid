@@ -10,6 +10,7 @@ type User struct {
 	ID uint `json:"id"`
 	Name string `json:"name"`
 	Age uint	`json:"age"`
+	Nickname string `json:"nickname" gorm:"-"`
 	Email string `json:"email" gorm:"unique"`
 	Password []byte `json:"-"`
 	Profile Profile `gorm:"constraint:OnDelete:CASCADE"`
@@ -27,4 +28,8 @@ func (user *User) SetPassword(password string) {
 
 func (user *User) ComparePassword(password string) error {
 	return bcrypt.CompareHashAndPassword(user.Password, []byte(password))
+}
+
+func (user *User) GetNickname() string {
+	return user.Name + " " + user.Email;
 }
